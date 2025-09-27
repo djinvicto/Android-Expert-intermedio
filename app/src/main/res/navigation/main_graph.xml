@@ -27,8 +27,8 @@
     <activity
         android:id="@+id/horoscopeDetailActivity"
         android:name="com.varaujo.horoscapp.ui.detail.HoroscopeDetailActivity"
-        android:label="activity_horoscope_detail2"
-        tools:layout="@layout/activity_horoscope_detail2" >
+        android:label="activity_horoscope_detail"
+        tools:layout="@layout/activity_horoscope_detail" >
         <argument
             android:name="type"
             app:argType="com.varaujo.horoscapp.domain.model.HoroscopeModel" />
