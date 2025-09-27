@@ -7,8 +7,9 @@ import androidx.navigation.fragment.NavHostFragment
 import com.varaujo.horoscapp.R
 import com.varaujo.horoscapp.databinding.ActivityMainBinding
 import androidx.navigation.ui.setupWithNavController
+import dagger.hilt.android.AndroidEntryPoint
 
-
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
