@@ -79,4 +79,13 @@ dependencies {
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
     implementation("com.squareup.okhttp3:logging-interceptor:4.3.1")
 
+    //Camera x
+    val cameraVersion = "1.2.3"
+
+    implementation("androidx.camera:camera:camera-core:{cameraVersion}")
+    implementation("androidx.camera:camera:camera-camera2:${cameraVersion}")
+    implementation("androidx.camera:camera:camera-lifecycle:${cameraVersion}")
+    implementation("androidx.camera:camera:camera-view:${cameraVersion}")
+    implementation("androidx.camera:camera:camera-extensions:${cameraVersion}")
+
 }
