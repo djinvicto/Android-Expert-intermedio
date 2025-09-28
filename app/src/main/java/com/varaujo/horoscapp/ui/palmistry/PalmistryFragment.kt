@@ -1,11 +1,16 @@
 package com.varaujo.horoscapp.ui.palmistry
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.camera.core.CameraSelector
+import androidx.camera.core.Preview
+import androidx.camera.lifecycle.ProcessCameraProvider
+import androidx.core.content.ContextCompat
 import androidx.core.content.PermissionChecker
 import androidx.fragment.app.Fragment
 import com.varaujo.horoscapp.databinding.FragmentPalmistryBinding
@@ -27,7 +32,7 @@ class PalmistryFragment : Fragment() {
     ){
         isGrandted ->
             if (isGrandted){
-                //startCamera
+                startCamera()
             }else{
                 Toast.makeText(requireContext(),"Acepta los permisos para poder disfrutar de una experiencia magica",Toast.LENGTH_LONG)
             }
@@ -46,7 +51,7 @@ class PalmistryFragment : Fragment() {
 
         if(checkCameraPermission()){
             // Tiene permisos aceptados
-            //startCamera
+            startCamera()
         }else{
             requestPermissionLauncher.launch(CAMERA_PERMISSION)
         }
@@ -57,6 +62,30 @@ class PalmistryFragment : Fragment() {
             requireContext(),
             CAMERA_PERMISSION
         ) == PermissionChecker.PERMISSION_GRANTED
+    }
+
+    private fun startCamera(){
+        val cameraProviderFuture = ProcessCameraProvider.getInstance(requireContext())
+        cameraProviderFuture.addListener({
+            val cameraProvider: ProcessCameraProvider = cameraProviderFuture.get()
+
+            val preview = Preview.Builder()
+                .build()
+                .also{
+                    it.setSurfaceProvider(binding.viewFinder.surfaceProvider)
+                }
+
+            val cameraSelector = CameraSelector.DEFAULT_BACK_CAMERA
+
+            try {
+                cameraProvider.unbindAll()
+
+                cameraProvider.bindToLifecycle(this,cameraSelector,preview)
+            }catch (e:Exception){
+                Log.e("Prueba", "Algo fallo ${e.message}")
+            }
+
+        }, ContextCompat.getMainExecutor(requireContext()))
     }
 
 
