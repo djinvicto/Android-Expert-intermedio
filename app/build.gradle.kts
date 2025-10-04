@@ -88,4 +88,8 @@ dependencies {
     implementation("androidx.camera:camera-view:${cameraVersion}")
     implementation("androidx.camera:camera-extensions:${cameraVersion}")
 
+    //UnitTesting
+    testImplementation ("io.kotlintest:kotlintest-runner-junit5:3.4.2")
+    testImplementation ("io.mockk:mockk:1.12.3")
+
 }
